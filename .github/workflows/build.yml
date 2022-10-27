@@ -56,8 +56,8 @@ jobs:
           #linux/arm64
           mkdir -p /tmp/amd64
           mkdir -p /tmp/arm64
-          docker run -i --rm --entrypoint="" -v /tmp/amd64:/tmp ghcr.io/labring/lvscare:${{ steps.get_version.outputs.VERSION }} sh -c "cp /root/lvscare /tmp"
-          docker run -i --rm --entrypoint="" -v /tmp/arm64:/tmp --platform linux/arm64 ghcr.io/labring/lvscare:${{ steps.get_version.outputs.VERSION }} sh -c "cp /root/lvscare /tmp"
+          docker run -i --rm --entrypoint="" -v /tmp/amd64:/tmp ghcr.io/labring/lvscare:${{ steps.get_version.outputs.VERSION }} sh -c "cp /root/lvscare /tmp 2>/dev/null || cp /usr/bin/lvscare /tmp 2>/dev/null || true"
+          docker run -i --rm --entrypoint="" -v /tmp/arm64:/tmp --platform linux/arm64 ghcr.io/labring/lvscare:${{ steps.get_version.outputs.VERSION }} sh -c "cp /root/lvscare /tmp 2>/dev/null || cp /usr/bin/lvscare /tmp 2>/dev/null || true"
 
           # buildkit-v0.10.4.linux-amd64.tar.gz
           pushd /tmp/amd64 &>/dev/null
