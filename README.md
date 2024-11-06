@@ -1,8 +1,8 @@
 ## Usage
 ```bash
 latest_ver=$(curl -fsSL https://api.github.com/repos/dyrnq/lvscare-binary/releases/latest | jq -r '.tag_name')
-[ "$(uname -m)" = "x86_64" ] && arch="amd64";
-[ "$(uname -m)" = "aarch64" ] && arch="arm64";
+if [ "$(uname -m)" = "x86_64" ]; then arch="amd64"; fi
+if [ "$(uname -m)" = "aarch64" ]; then arch="arm64"; fi
 DOWNLOAD_URL="https://github.com/dyrnq/lvscare-binary/releases/download/${latest_ver}/lvscare-${latest_ver}.linux-${arch}.tar.gz"
 #DOWNLOAD_URL="${DOWNLOAD_URL/github.com/files.m.daocloud.io/github.com}"
 DOWNLOAD_URL="${DOWNLOAD_URL/https/https://mirror.ghproxy.com/https}"
